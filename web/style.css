@@ -1,0 +1,111 @@
+:root {
+    --font-fam: JetBrainsMono, monospace;
+    --line-height: 30px;
+    --font-size: 14px;
+}
+
+@font-face {
+    font-family: JetBrainsMono;
+    src:url(JetBrainsMono-Regular-40b288a985bc90e34d3260d92b8f4515.woff2) format("woff2"),
+    url(JetBrainsMono-Regular-edaecf9876afc052ec1a241d9443d594.woff) format("woff"),
+    url(JetBrainsMono-Regular-6664e867457f3dc3d7ee961775261e80.ttf) format("truetype");
+    font-weight:400;
+    font-style:normal
+}
+
+body {
+    font-family: var(--font-fam);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-rendering: geometricPrecision;
+}
+
+input, textarea, button {
+    font-family: var(--font-fam);
+    font-size: var(--font-size);
+    color: var(--f_high);
+    background-color: var(--background);
+    border: none;
+    line-height: var(--line-height);
+    resize: none;
+    height: 100%;
+}
+
+h1 {
+    font-size: var(--font-size);
+    font-weight: normal;
+    min-height: var(--line-height);
+    color: var(--f_med);
+    text-transform: lowercase;
+    line-height: var(--line-height);
+    position: relative;
+}
+h1 span {
+    background-color: var(--background);
+    z-index: 3;
+    position: relative;
+    padding-right: 10px;
+}
+
+h1:after {
+    content: '';
+    width: calc(100% - 30px);
+    margin-left: 10px;
+    border-bottom: solid 1px var(--f_low);
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.col:last-child h1:after {
+    width: 100%;
+}
+
+button {
+}
+
+button.off {
+    color: var(--f_low);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    max-width: 70rem;
+    transform: translate(25%, 25%);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.col:not(:last-child) > *:nth-child(2n) {
+    border-right: solid 1px var(--f_low);
+    padding-right: 10xp;
+    margin-right: 5px;
+    height: 100%;
+}
+
+.col:not(:first-child) > * {
+    padding-left: 10px;
+}
+
+canvas {
+    width: 100%;
+    height: 30px;
+}
