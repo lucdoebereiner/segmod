@@ -1,9 +1,9 @@
-var ctx = document.getElementById('scope').getContext('2d');
+var ctx = document.getElementById("scope").getContext("2d");
 
-function hexToRGB(hex,alpha) {
+function hexToRGB(hex, alpha) {
   var r = parseInt(hex.slice(1, 3), 16),
-      g = parseInt(hex.slice(3, 5), 16),
-      b = parseInt(hex.slice(5, 7), 16);
+    g = parseInt(hex.slice(3, 5), 16),
+    b = parseInt(hex.slice(5, 7), 16);
 
   if (alpha) {
     return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
@@ -15,7 +15,7 @@ function hexToRGB(hex,alpha) {
 function draw() {
   var width = ctx.canvas.width;
   var height = ctx.canvas.height;
-  var scaling =  30 / 32768; //(height + 32768) / (32768 * 2);
+  var scaling = 30 / 32768; //(height + 32768) / (32768 * 2);
   var timeData = data;
   var risingEdge = 0;
   var edgeThreshold = 5;

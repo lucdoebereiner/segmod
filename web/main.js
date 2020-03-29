@@ -7,7 +7,7 @@ window.onload = () => {
   theme.install(document.body);
   theme.start();
 
-  Module.onRuntimeInitialized = _ => {
+  Module.onRuntimeInitialized = (_) => {
     window.read = () => {
       tableFrews = document.getElementById("freqs").value;
       tableData = document.getElementById("index").value;
@@ -28,24 +28,23 @@ window.onload = () => {
 
     read();
     draw();
-  }
+  };
 };
 
 audio.onpause = () => {
-  document.getElementById("playButton").className = "off"
-}
+  document.getElementById("playButton").className = "off";
+};
 
 const play = (e) => {
   e.className = !audio.paused ? "off" : "";
   if (!audio.paused) {
     audio.pause();
-  } else{
+  } else {
     audio.play();
   }
-}
+};
 
 const loopToggle = (e) => {
   audio.loop = !audio.loop;
   e.className = audio.loop ? "" : "off";
-}
-
+};
