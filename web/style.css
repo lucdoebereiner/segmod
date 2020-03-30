@@ -30,6 +30,10 @@ body {
   text-rendering: geometricPrecision;
 }
 
+::selection {
+  background: var(--f_med);
+}
+
 input,
 textarea,
 button {
@@ -41,6 +45,8 @@ button {
   line-height: var(--line-height);
   resize: none;
   height: 100%;
+  caret-color: var(--f_med);
+  outline: none;
 }
 
 h1 {
