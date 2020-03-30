@@ -1,6 +1,7 @@
 var audio = new Audio();
 var data = [];
 var theme;
+var compile;
 audio.loop = true;
 
 window.onload = () => {
@@ -25,11 +26,23 @@ window.onload = () => {
       wave.header.sampleRate = 44100;
       wave.header.numChannels = 1;
       wave.Make(data);
+      var continuePlaying;
+      if (!audio.paused) {
+        continuePlaying = true;
+        audio.pause();
+      }
       audio.src = wave.dataURI;
+      if (continuePlaying) audio.play();
     };
 
     read();
     draw();
+  };
+
+  window.compile = (e, destination) => {
+    let seq = cljs.core.clj__GT_js(wave_dsl.parser.parse(e.value));
+    document.getElementById(destination).value = seq.join(" ");
+    read();
   };
 };
 

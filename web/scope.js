@@ -23,8 +23,8 @@ function draw() {
   ctx.fillStyle = hexToRGB(theme.active.background);
   ctx.fillRect(0, 0, width, height);
 
-  ctx.lineWidth = 4;
-  ctx.strokeStyle = hexToRGB(theme.active.f_med);
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = hexToRGB(theme.active.f_high);
   ctx.beginPath();
 
   // No buffer overrun protection

@@ -2,15 +2,16 @@
   --font-fam: JetBrainsMono, monospace;
   --line-height: 30px;
   --font-size: 14px;
+  --line-width: 1px;
 }
 
 @font-face {
   font-family: JetBrainsMono;
-  src: url(JetBrainsMono-Regular-40b288a985bc90e34d3260d92b8f4515.woff2)
+  src: url(vendors/JetBrainsMono-Regular-40b288a985bc90e34d3260d92b8f4515.woff2)
       format("woff2"),
-    url(JetBrainsMono-Regular-edaecf9876afc052ec1a241d9443d594.woff)
+    url(vendors/JetBrainsMono-Regular-edaecf9876afc052ec1a241d9443d594.woff)
       format("woff"),
-    url(JetBrainsMono-Regular-6664e867457f3dc3d7ee961775261e80.ttf)
+    url(vendors/JetBrainsMono-Regular-6664e867457f3dc3d7ee961775261e80.ttf)
       format("truetype");
   font-weight: 400;
   font-style: normal;
@@ -62,7 +63,7 @@ h1:after {
   content: "";
   width: calc(100% - 30px);
   margin-left: 10px;
-  border-bottom: solid 1px var(--f_low);
+  border-bottom: solid var(--line-width) var(--f_low);
   z-index: 1;
   position: absolute;
   left: 0;
@@ -100,7 +101,7 @@ button.off {
 }
 
 .col:not(:last-child) > *:nth-child(2n) {
-  border-right: solid 1px var(--f_low);
+  border-right: solid var(--line-width) var(--f_low);
   padding-right: 10xp;
   margin-right: 5px;
   height: 100%;

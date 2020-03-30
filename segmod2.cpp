@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -268,7 +267,7 @@ std::vector<int> gen(std::string iFreqs, std::string seqs, std::string waveforms
   }
 
   int lent = static_cast<int>(freqIndices.size());
-  printf("freqIndices.length %d\n", lent);
+  //printf("freqIndices.length %d\n", lent);
 
 #endif
   
@@ -278,7 +277,7 @@ std::vector<int> gen(std::string iFreqs, std::string seqs, std::string waveforms
     }
   }
   int flent = static_cast<int>(freqs.size());
-  printf("freqs.length %d\n", flent);
+  //printf("freqs.length %d\n", flent);
   
   if (breakpointPosition == 0) {
     sndLength = (totalLength(freqs, sampleRate) / 2) + 1;
@@ -286,7 +285,7 @@ std::vector<int> gen(std::string iFreqs, std::string seqs, std::string waveforms
     sndLength = totalLength(freqs, sampleRate);
   }
   
-  printf("sndLenght %d\n",sndLength);
+  //printf("sndLenght %d\n",sndLength);
 
   snd = new float [sndLength];
 
@@ -336,7 +335,7 @@ std::vector<int> gen(std::string iFreqs, std::string seqs, std::string waveforms
 }
 
 int main(int argc, char *argv[]) {
-  printf("hello world\n");
+  //printf("hello world\n");
   gen("200 300 400 500 600 700", "1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 6 6 6 6 6", "1 2 3");
 }
 
