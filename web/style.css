@@ -94,7 +94,7 @@ button.off {
 .row {
   display: flex;
   flex-direction: row;
-  flex: 1;
+  flex: auto;
 }
 .col {
   display: flex;
