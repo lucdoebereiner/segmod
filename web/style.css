@@ -75,6 +75,8 @@ h1:after {
 }
 
 button {
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 button.off {
