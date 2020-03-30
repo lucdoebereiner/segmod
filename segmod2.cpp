@@ -86,7 +86,7 @@ float sawtooth(float phase, float phaseOffset) {
   return linInterp(ph, 1.0, -1.0);
 }
 
-std::vector<int> gen(std::string iFreqs, std::string seqs) {
+std::vector<int> gen(std::string iFreqs, std::string seqs, std::string waveforms) {
   float * snd;
   float phaseOffset = 0.0;
   int sampleRate = 44100;
@@ -111,7 +111,7 @@ std::vector<int> gen(std::string iFreqs, std::string seqs) {
   float lastPhase = 0.0;
   float curPhaseInc; 
   int curWave = 0;
-  bool staticWave = true;
+  bool staticWave = false;
   float thisSample = 0.0;
   bool tableInput = false;
   int opt;
@@ -262,6 +262,11 @@ std::vector<int> gen(std::string iFreqs, std::string seqs) {
     freqIndices.push_back(tableIndex);
   }
 
+  std::istringstream isw(waveforms.c_str());
+  while (isw >> wave) {
+    waves.push_back(wave);
+  }
+
   int lent = static_cast<int>(freqIndices.size());
   printf("freqIndices.length %d\n", lent);
 
@@ -328,13 +333,11 @@ std::vector<int> gen(std::string iFreqs, std::string seqs) {
   file.write(snd, sndLength);
 #endif
   return sndTwo;
-  //printf("snd3 %f\n", snd[3] );
-  //return snd;
 }
 
 int main(int argc, char *argv[]) {
   printf("hello world\n");
-  gen("200 300 400 500 600 700", "1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 6 6 6 6 6");
+  gen("200 300 400 500 600 700", "1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 6 6 6 6 6", "1 2 3");
 }
 
 #ifdef EMSCRIPTEN

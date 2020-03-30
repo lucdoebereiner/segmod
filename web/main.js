@@ -11,7 +11,8 @@ window.onload = () => {
     window.read = () => {
       tableFrews = document.getElementById("freqs").value;
       tableData = document.getElementById("index").value;
-      vec = Module.gen(tableFrews, tableData);
+      waveformsData = document.getElementById("waveforms").value;
+      vec = Module.gen(tableFrews, tableData, waveformsData);
 
       for (var i = 0; i < vec.size(); i++) {
         // TODO: figure out correct type over wasm->js embind
