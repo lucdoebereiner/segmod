@@ -1,6 +1,7 @@
 var audio = new Audio();
 var data = [];
 var theme;
+audio.loop = true;
 
 window.onload = () => {
   theme = new Theme();
