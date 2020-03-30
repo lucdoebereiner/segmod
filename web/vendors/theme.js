@@ -10,15 +10,15 @@ function Theme (client) {
 
   this.active = {}
   this.default = {
-    background: '#29272b',
-    f_high: '#ffffff',
-    f_med: '#e47464',
-    f_low: '#66606b',
-    f_inv: '#000000',
-    b_high: '#000000',
-    b_med: '#201e21',
-    b_low: '#322e33',
-    b_inv: '#e47464'
+    background: "#111111",
+    f_high: "#efefef",
+    f_med: "#ff4444",
+    f_low: "#333333",
+    f_inv: "#000000",
+    b_high: "#666666",
+    b_med: "#444444",
+    b_low: "#222222",
+    b_inv: "#ff4444"
   }
 
   // Callbacks
