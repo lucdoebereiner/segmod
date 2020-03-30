@@ -23,7 +23,7 @@ function draw() {
   ctx.fillStyle = hexToRGB(theme.active.background);
   ctx.fillRect(0, 0, width, height);
 
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 4;
   ctx.strokeStyle = hexToRGB(theme.active.f_high);
   ctx.beginPath();
 
