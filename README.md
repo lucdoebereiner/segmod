@@ -5,15 +5,23 @@ luc.doebereiner@gmail.com
 - [ ] Fix: Make cli tool work again
 - [ ] Add all options to web UI:
   - [ ] Bit rate change
-  - [ ] Download
+  - [ ] Phase offset
+  - [ ] Breakpoints per cycle
+  - [x] Download
+  - [ ] Sample rates
+- [ ] Fix: Oscilloscope working again
 - [ ] Fix: Add more efficient wasm->js bridge so longer tables are possible
-- [ ] Make web UI pretty/usable
-  - [ ] Share functionality
-- [ ] Bonus: Add support for [wave-dsl](https://github.com/kfirmanty/wave-dsl)
-- [ ] Bonus: Perhaps add looping, multitracking of audio
+- [ ] Better defaults in web UI
+- [x] Make web UI pretty/usable
+  - [x] 100R [Theme](https://github.com/hundredrabbits/Themes) support
+  - [x] Share functionality
+- [x] Bonus: Add support for [wave-dsl](https://github.com/kfirmanty/wave-dsl)
+  - [ ] Add wave-dsl as a submodule to git
+- [x] Bonus: looping
+- [ ] Bonus: multitracking/multiple segmods running at the same time for layering
 
 
-
+# CLI
 Usage: ```./segmod2 [-s samplerate] [-w waveform file/static waveform] [-o output] [-p phase offset] [-b breakpoints per cycle (0 or 1)] [-f frequencies file] [-i index format input file]```
 
 ```  
@@ -74,3 +82,7 @@ the available waveforms. The waveform may change whenver the frequency
 changes, i.e. each cycle/half cycle (depending on the "-b" option").
 
 Lines starting with '#' are considered comments.
+
+
+# Web
+
