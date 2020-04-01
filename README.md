@@ -1,8 +1,22 @@
-SEGMOD (c) 2013-2018 by Luc Döbereiner and Martin Lorenz
+SEGMOD (c) 2013-2020 by Luc Döbereiner and Martin Lorenz
 luc.doebereiner@gmail.com
 
-Usage: ./segmod2 [-s samplerate] [-w waveform file/static waveform] [-o output] [-p phase offset] [-b breakpoints per cycle (0 or 1)] [-f frequencies file] [-i index format input file]
+# TODO 
+- [ ] Fix: Make cli tool work again
+- [ ] Add all options to web UI:
+  - [ ] Bit rate change
+  - [ ] Download
+- [ ] Fix: Add more efficient wasm->js bridge so longer tables are possible
+- [ ] Make web UI pretty/usable
+  - [ ] Share functionality
+- [ ] Bonus: Add support for [wave-dsl](https://github.com/kfirmanty/wave-dsl)
+- [ ] Bonus: Perhaps add looping, multitracking of audio
 
+
+
+Usage: ```./segmod2 [-s samplerate] [-w waveform file/static waveform] [-o output] [-p phase offset] [-b breakpoints per cycle (0 or 1)] [-f frequencies file] [-i index format input file]```
+
+```  
   -sr 	: sample rate. The default is 44100
   -w 	: either a file name (see below) or a static waveform number. 0 (default) is sine, 1 is triangle, 2 is pulse, 3 is sawtooth, 4 is silence.
   -f	: a file containing a sequence of frequences (see below), can be used instead of "-i" option/format.
@@ -10,17 +24,17 @@ Usage: ./segmod2 [-s samplerate] [-w waveform file/static waveform] [-o output] 
   -b 	: breakpoints per cycle. 0 (default) two breakpoints, 1 one breakpoint.
   -p 	: if set phase will be offset by pi avoiding discontiunities with sine waveform.
   -o 	: output filename. The default is "out.wav". Always a wav file.
-  
+```  
 
 The -f and the -i options cannot be used together.
 
 EXAMPLES:
 
-$ ./segmod -i freqseq.txt -o seq.wav
+```$ ./segmod -i freqseq.txt -o seq.wav```
 
-$ ./segmod -f myfrequencies.txt -o output.wav -p -w 1 -sr 48000
+```$ ./segmod -f myfrequencies.txt -o output.wav -p -w 1 -sr 48000```
 
-$ ./segmod -f myfrequencies.txt -w waveformseq.txt -o output2.wav -b 1
+```$ ./segmod -f myfrequencies.txt -w waveformseq.txt -o output2.wav -b 1```
 
 
 INPUT FILE FORMATS
