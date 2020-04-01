@@ -1,0 +1,69 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <title>Segmod</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="web/vendors/theme.css">
+    <link rel="stylesheet" href="web/style.css">
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<div class="container">
+    <section class="row" style="flex-grow: 0">
+        <section class="col" style="flex:2">
+            <h1><span>Frequencies</span></h1>
+            <textarea id="freqs" rows="1" tabindex="1" onkeyup="setFreqs(this)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">200 300 400 500 600 700</textarea>
+        </section>
+
+        <section class="col" style="flex: 1">
+            <h1><span>Controls</span></h1>
+            <div>
+                <button title="ctrl+p" onclick="play(this)" id="playButton" class="off">play</button>
+                <button title="ctrl+l" onclick="loopToggle(this)">loop</button>
+                <button onclick="share()">share</button>
+                <button onclick="download()">download</button>
+            </div>
+        </section>
+        <section class="col" style="flex: 1">
+            <h1><span>Scope</span></h1>
+            <canvas id="scope"></canvas>
+        </section>
+    </section>
+    <section class="row" style="flex: 3">
+        <section class="col">
+            <h1><span>Index</span></h1>
+            <textarea id="dslIndex" tabindex="2" onkeyup="compile(this.value, 'index')" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">[[[<si 1> <si 2> <g 1> <s 3>]*4 <g 6> <si 4>]*2]*2</textarea>
+        </section>
+        <section class="col">
+            <h1></h1>
+            <textarea id="index" onkeyup="read()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        </section>
+    </section>
+    <section class="row">
+        <section class="col">
+            <h1><span>Waveforms</span></h1>
+            <textarea id="dslWaveforms" tabindex="3" onkeyup="compile(this.value, 'waveforms')" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><si 1> <si 2> <g 1> <s 3> <g 3></textarea>
+        </section>
+        <section class="col">
+            <h1></h1>
+            <textarea id="waveforms" onkeyup="read()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        </section>
+    </section>
+</div>
+
+<script src="web/compiled/segmod2.out.js"></script>
+<script src="web/vendors/riff-wave.js"></script>
+<script src="web/vendors/Blob.js"></script>
+<script src="web/vendors/FileSaver.min.js"></script>
+<script src="web/compiled/parser-only.js"></script>
+<script src="web/main.js"></script>
+<script src="web/scope.js"></script>
+<script src="web/vendors/theme.js"></script>
+</body>
+</html>
+
