@@ -15,12 +15,16 @@
 
 <div class="container">
     <section class="row" style="flex-grow: 0">
-        <section class="col" style="flex:2">
+        <section class="col" style="flex:3">
             <h1><span>Frequencies</span></h1>
             <textarea id="freqs" rows="1" tabindex="1" onkeyup="setFreqs(this)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">200 300 400 500 600 700</textarea>
         </section>
+        <section class="col" style="flex:1">
+            <h1><span>Seed</span></h1>
+            <input id="seed" type="number" style="width: calc(100% - 5px)" onchange="changeSeed(this)"/>
+        </section>
 
-        <section class="col" style="flex: 1">
+        <section class="col" style="flex: 2">
             <h1><span>Controls</span></h1>
             <div>
                 <button title="ctrl+p" onclick="play(this)" id="playButton" class="off">play</button>
@@ -29,7 +33,7 @@
                 <button onclick="download()">download</button>
             </div>
         </section>
-        <section class="col" style="flex: 1">
+        <section class="col" style="flex: 2">
             <h1><span>Scope</span></h1>
             <canvas id="scope"></canvas>
         </section>

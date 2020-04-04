@@ -6,14 +6,22 @@ var wave = new RIFFWAVE();
 audio.loop = true;
 var randomSeed;
 
-const getQParam = (param) => {
+const getQParam = (param, noB64) => {
   let p = new URL(window.location).searchParams.get(param);
-  return p ? decodeURI(atob(p)) : "";
-}
+  if (noB64) {
+    return p ? decodeURI(p) : "";
+  } else {
+    return p ? decodeURI(atob(p)) : "";
+  }
+};
 
-const setQParam = (param, val) => {
+const setQParam = (param, val, noB64) => {
   let url = new URL(window.location);
-  url.searchParams.set(param, encodeURI(btoa(val)));
+  if (noB64) {
+    url.searchParams.set(param, encodeURI(val));
+  } else {
+    url.searchParams.set(param, encodeURI(btoa(val)));
+  }
   window.history.pushState({ path: url.href }, "", url.href);
 };
 
@@ -74,11 +82,12 @@ window.onload = () => {
       w = document.getElementById("dslWaveforms").value;
     }
 
-    randomSeed = getQParam("seed");
+    randomSeed = parseInt(getQParam("seed",true));
     if (!randomSeed) {
       randomSeed = Math.floor(Math.random() * 9998) + 1;
-      setQParam("seed", randomSeed)
+      setQParam("seed", randomSeed,true)
     }
+    document.getElementById("seed").value = randomSeed;
 
     compile(i, "index", false);
     compile(w, "waveforms", true);
@@ -88,7 +97,7 @@ window.onload = () => {
 
   window.compile = (txt, destination, shouldRender) => {
     setQParam(destination, txt);
-    let seq = wave_dsl.parser.parse__GT_js(txt, 1);
+    let seq = wave_dsl.parser.parse__GT_js(txt, randomSeed);
     document.getElementById(destination).value = seq.join(" ");
     shouldRender ? read() : undefined;
   };
@@ -112,6 +121,13 @@ const loopToggle = (e) => {
   audio.loop = !audio.loop;
   e.className = audio.loop ? "" : "off";
 };
+
+const changeSeed = (e) => {
+  randomSeed = e.value;
+  setQParam("seed", randomSeed,true);
+  compile(document.getElementById("dslWaveforms").value, "waveforms", true);
+  compile(document.getElementById("dslIndex").value, "index", true);
+}
 
 const dataURItoBlob = (dataURI) => {
   // convert base64/URLEncoded data component to raw binary data held in a string
