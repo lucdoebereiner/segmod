@@ -9,14 +9,14 @@ luc.doebereiner@gmail.com
   - [ ] Breakpoints per cycle
   - [x] Download
   - [ ] Sample rates
-- [ ] Fix: Oscilloscope working again
+- [x] Fix: Oscilloscope working again
 - [ ] Fix: Add more efficient wasm->js bridge so longer tables are possible
-- [ ] Better defaults in web UI
+- [x] Better defaults in web UI
 - [x] Make web UI pretty/usable
   - [x] 100R [Theme](https://github.com/hundredrabbits/Themes) support
   - [x] Share functionality
 - [x] Bonus: Add support for [wave-dsl](https://github.com/kfirmanty/wave-dsl)
-  - [ ] Add wave-dsl as a submodule to git
+  - [x] Add wave-dsl as a submodule to git
 - [x] Bonus: looping
 - [ ] Bonus: multitracking/multiple segmods running at the same time for layering
 

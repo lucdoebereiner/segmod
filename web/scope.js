@@ -1,5 +1,11 @@
 // Adapted from https://codepen.io/ContemporaryInsanity/pen/Mwvqpb
 
+var audio_ctx = new AudioContext();
+var analyser = audio_ctx.createAnalyser();
+var source = audio_ctx.createMediaElementSource(audio);
+source.connect(audio_ctx.destination);
+source.connect(analyser);
+
 var canvas_ctx = document.getElementById("scope").getContext("2d");
 
 function hexToRGB(hex, alpha) {
@@ -17,27 +23,29 @@ function hexToRGB(hex, alpha) {
 function draw() {
   var width = canvas_ctx.canvas.width;
   var height = canvas_ctx.canvas.height;
-  var scaling = 30 / 32768; //(height + 32768) / (32768 * 2);
-  var timeData = data;
+  var timeData = new Uint8Array(analyser.frequencyBinCount);
+  var scaling = height / 256;
   var risingEdge = 0;
-  var edgeThreshold = 5;
+  var edgeThreshold = 8;
 
-  canvas_ctx.fillStyle = hexToRGB(theme.active.background);
+  analyser.getByteTimeDomainData(timeData);
+
+  canvas_ctx.fillStyle = hexToRGB(theme.active.background, 0.8);
   canvas_ctx.fillRect(0, 0, width, height);
 
-  canvas_ctx.lineWidth = 4;
+  canvas_ctx.lineWidth = 2;
   canvas_ctx.strokeStyle = hexToRGB(theme.active.f_high);
   canvas_ctx.beginPath();
 
   // No buffer overrun protection
-  while (timeData[risingEdge++] - 16000 > 0 && risingEdge <= width);
+  while (timeData[risingEdge++] - 128 > 0 && risingEdge <= width);
   if (risingEdge >= width) risingEdge = 0;
 
-  while (timeData[risingEdge++] - 16000 < edgeThreshold && risingEdge <= width);
+  while (timeData[risingEdge++] - 128 < edgeThreshold && risingEdge <= width);
   if (risingEdge >= width) risingEdge = 0;
 
   for (var x = risingEdge; x < timeData.length && x - risingEdge < width; x++)
-    canvas_ctx.lineTo(x - risingEdge, (height - timeData[x] * scaling) / 2);
+    canvas_ctx.lineTo(x - risingEdge, height - timeData[x] * scaling);
 
   canvas_ctx.stroke();
 
