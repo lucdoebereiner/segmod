@@ -4,9 +4,12 @@ var theme;
 var compile;
 var wave = new RIFFWAVE();
 audio.loop = true;
+var randomSeed;
 
-const getQParam = (param) =>
-  decodeURI(atob(new URL(window.location).searchParams.get(param)));
+const getQParam = (param) => {
+  let p = new URL(window.location).searchParams.get(param);
+  return p ? decodeURI(atob(p)) : "";
+}
 
 const setQParam = (param, val) => {
   let url = new URL(window.location);
@@ -52,21 +55,39 @@ window.onload = () => {
   };
 
   window.init = () => {
-    let f = (document.getElementById("freqs").value = getQParam("frequencies")),
-      i = (document.getElementById("dslIndex").value = getQParam("index")),
-      w = (document.getElementById("dslWaveforms").value = getQParam(
-        "waveforms"
-      ));
-    compile(i, "index");
-    compile(f, "waveforms");
+    let f = getQParam("frequencies");
+    if (f) {
+      document.getElementById("freqs").value = f;
+    }
+    let i = getQParam("index");
+    if (i) {
+      document.getElementById("dslIndex").value = i;
+    }else{
+      i = document.getElementById("dslIndex").value
+    }
+    let w = getQParam( "waveforms");
+    if (w) {
+      document.getElementById("dslWaveforms").value = w;
+    }else {
+      w = document.getElementById("dslWaveforms").value
+    }
+    randomSeed = getQParam("seed");
+    if (!randomSeed) {
+      randomSeed = Math.floor(Math.random() * 9998) + 1;
+      setQParam("seed", randomSeed)
+    }
+
+    compile(i, "index", false);
+    compile(w, "waveforms", true);
+
     draw();
   };
 
-  window.compile = (txt, destination) => {
+  window.compile = (txt, destination, shouldRender) => {
     setQParam(destination, txt);
-    let seq = wave_dsl.parser.parse__GT_js(txt);
+    let seq = wave_dsl.parser.parse__GT_js(txt, 1);
     document.getElementById(destination).value = seq.join(" ");
-    read();
+    shouldRender ? read() : undefined
   };
 };
 

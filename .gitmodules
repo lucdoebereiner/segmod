@@ -1,0 +1,3 @@
+[submodule "wave-dsl"]
+	path = wave-dsl
+	url = https://github.com/kfirmanty/wave-dsl.git

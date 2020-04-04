@@ -1,4 +1,6 @@
-var ctx = document.getElementById("scope").getContext("2d");
+// Adapted from https://codepen.io/ContemporaryInsanity/pen/Mwvqpb
+
+var canvas_ctx = document.getElementById("scope").getContext("2d");
 
 function hexToRGB(hex, alpha) {
   var r = parseInt(hex.slice(1, 3), 16),
@@ -13,19 +15,19 @@ function hexToRGB(hex, alpha) {
 }
 
 function draw() {
-  var width = ctx.canvas.width;
-  var height = ctx.canvas.height;
+  var width = canvas_ctx.canvas.width;
+  var height = canvas_ctx.canvas.height;
   var scaling = 30 / 32768; //(height + 32768) / (32768 * 2);
   var timeData = data;
   var risingEdge = 0;
   var edgeThreshold = 5;
 
-  ctx.fillStyle = hexToRGB(theme.active.background);
-  ctx.fillRect(0, 0, width, height);
+  canvas_ctx.fillStyle = hexToRGB(theme.active.background);
+  canvas_ctx.fillRect(0, 0, width, height);
 
-  ctx.lineWidth = 4;
-  ctx.strokeStyle = hexToRGB(theme.active.f_high);
-  ctx.beginPath();
+  canvas_ctx.lineWidth = 4;
+  canvas_ctx.strokeStyle = hexToRGB(theme.active.f_high);
+  canvas_ctx.beginPath();
 
   // No buffer overrun protection
   while (timeData[risingEdge++] - 16000 > 0 && risingEdge <= width);
@@ -35,9 +37,9 @@ function draw() {
   if (risingEdge >= width) risingEdge = 0;
 
   for (var x = risingEdge; x < timeData.length && x - risingEdge < width; x++)
-    ctx.lineTo(x - risingEdge, (height - timeData[x] * scaling) / 2);
+    canvas_ctx.lineTo(x - risingEdge, (height - timeData[x] * scaling) / 2);
 
-  ctx.stroke();
+  canvas_ctx.stroke();
 
   requestAnimationFrame(draw);
 }
