@@ -1,5 +1,10 @@
 // Adapted from https://codepen.io/ContemporaryInsanity/pen/Mwvqpb
 
+var AudioContext =
+  window.AudioContext || // Default
+  window.webkitAudioContext || // Safari and old versions of Chrome
+  false;
+
 var audio_ctx = new AudioContext();
 var analyser = audio_ctx.createAnalyser();
 var source = audio_ctx.createMediaElementSource(audio);
@@ -33,7 +38,7 @@ function draw() {
   canvas_ctx.fillStyle = hexToRGB(theme.active.background, 0.8);
   canvas_ctx.fillRect(0, 0, width, height);
 
-  canvas_ctx.lineWidth = 2;
+  canvas_ctx.lineWidth = 1;
   canvas_ctx.strokeStyle = hexToRGB(theme.active.f_high);
   canvas_ctx.beginPath();
 

@@ -59,18 +59,21 @@ window.onload = () => {
     if (f) {
       document.getElementById("freqs").value = f;
     }
+
     let i = getQParam("index");
     if (i) {
       document.getElementById("dslIndex").value = i;
-    }else{
-      i = document.getElementById("dslIndex").value
+    } else {
+      i = document.getElementById("dslIndex").value;
     }
-    let w = getQParam( "waveforms");
+
+    let w = getQParam("waveforms");
     if (w) {
       document.getElementById("dslWaveforms").value = w;
-    }else {
-      w = document.getElementById("dslWaveforms").value
+    } else {
+      w = document.getElementById("dslWaveforms").value;
     }
+
     randomSeed = getQParam("seed");
     if (!randomSeed) {
       randomSeed = Math.floor(Math.random() * 9998) + 1;
@@ -87,7 +90,7 @@ window.onload = () => {
     setQParam(destination, txt);
     let seq = wave_dsl.parser.parse__GT_js(txt, 1);
     document.getElementById(destination).value = seq.join(" ");
-    shouldRender ? read() : undefined
+    shouldRender ? read() : undefined;
   };
 };
 
