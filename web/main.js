@@ -96,6 +96,7 @@ audio.onpause = () => {
 };
 
 const play = (e) => {
+  audio_ctx.resume();
   e.className = !audio.paused ? "off" : "";
   if (!audio.paused) {
     audio.pause();
