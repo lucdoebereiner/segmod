@@ -2,7 +2,7 @@ SEGMOD (c) 2013-2020 by Luc Döbereiner and Martin Lorenz
 luc.doebereiner@gmail.com
 
 # TODO 
-- [ ] Fix: Make cli tool work again
+- [x] Fix: Make cli tool work again
 - [ ] Add all options to web UI:
   - [ ] Bit rate change
   - [ ] Phase offset

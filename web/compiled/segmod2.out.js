@@ -662,8 +662,8 @@ var wasmMemory;
 // In the wasm backend, we polyfill the WebAssembly object,
 // so this creates a (non-native-wasm) table for us.
 var wasmTable = new WebAssembly.Table({
-  'initial': 354,
-  'maximum': 354 + 0,
+  'initial': 336,
+  'maximum': 336 + 0,
   'element': 'anyfunc'
 });
 
@@ -1271,11 +1271,11 @@ function updateGlobalBufferAndViews(buf) {
 }
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 5267360,
+    STACK_BASE = 5267040,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 24480,
-    DYNAMIC_BASE = 5267360,
-    DYNAMICTOP_PTR = 24320;
+    STACK_MAX = 24160,
+    DYNAMIC_BASE = 5267040,
+    DYNAMICTOP_PTR = 24000;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1802,7 +1802,7 @@ var ASM_CONSTS = {
 
 
 
-// STATICTOP = STATIC_BASE + 23456;
+// STATICTOP = STATIC_BASE + 23136;
 /* global initializers */  __ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
 
 
@@ -5991,7 +5991,7 @@ var ASM_CONSTS = {
     }
 
   function _emscripten_get_sbrk_ptr() {
-      return 24320;
+      return 24000;
     }
 
   function _emscripten_memcpy_big(dest, src, num) {
@@ -6628,13 +6628,6 @@ var _main = Module["_main"] = function() {
 };
 
 /** @type {function(...*):?} */
-var _fflush = Module["_fflush"] = function() {
-  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-  return Module["asm"]["fflush"].apply(null, arguments)
-};
-
-/** @type {function(...*):?} */
 var ___errno_location = Module["___errno_location"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
   assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
@@ -6642,10 +6635,10 @@ var ___errno_location = Module["___errno_location"] = function() {
 };
 
 /** @type {function(...*):?} */
-var _free = Module["_free"] = function() {
+var _fflush = Module["_fflush"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
   assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-  return Module["asm"]["free"].apply(null, arguments)
+  return Module["asm"]["fflush"].apply(null, arguments)
 };
 
 /** @type {function(...*):?} */
@@ -6653,6 +6646,13 @@ var _setThrew = Module["_setThrew"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
   assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
   return Module["asm"]["setThrew"].apply(null, arguments)
+};
+
+/** @type {function(...*):?} */
+var _free = Module["_free"] = function() {
+  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+  return Module["asm"]["free"].apply(null, arguments)
 };
 
 /** @type {function(...*):?} */
