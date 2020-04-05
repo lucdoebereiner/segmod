@@ -18,6 +18,7 @@ luc.doebereiner@gmail.com
 - [x] Bonus: Add support for [wave-dsl](https://github.com/kfirmanty/wave-dsl)
   - [x] Add wave-dsl as a submodule to git
 - [x] Bonus: looping
+- [ ] Add some intro to the web UI
 - [ ] Bonus: multitracking/multiple segmods running at the same time for layering
 
 
