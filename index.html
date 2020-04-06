@@ -15,12 +15,16 @@
 
 <div class="container">
     <section class="row" style="flex-grow: 0">
-        <section class="col" style="flex:2">
+        <section class="col" style="flex:3">
             <h1><span>Frequencies</span></h1>
             <textarea id="freqs" rows="1" tabindex="1" onkeyup="setFreqs(this)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">200 300 400 500 600 700</textarea>
         </section>
+        <section class="col" style="flex:1">
+            <h1><span>Seed</span></h1>
+            <input id="seed" type="number" style="width: calc(100% - 5px)" onchange="changeSeed(this)"/>
+        </section>
 
-        <section class="col" style="flex: 1">
+        <section class="col" style="flex: 2">
             <h1><span>Controls</span></h1>
             <div>
                 <button title="ctrl+p" onclick="play(this)" id="playButton" class="off">play</button>
@@ -29,15 +33,15 @@
                 <button onclick="download()">download</button>
             </div>
         </section>
-        <section class="col" style="flex: 1">
+        <section class="col" style="flex: 2">
             <h1><span>Scope</span></h1>
             <canvas id="scope"></canvas>
         </section>
     </section>
-    <section class="row" style="flex: 3">
+    <section class="row" style="flex: 12">
         <section class="col">
             <h1><span>Index</span></h1>
-            <textarea id="dslIndex" tabindex="2" onkeyup="compile(this.value, 'index')" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">[[[<si 1> <si 2> <g 1> <s 3>]*4 <g 6> <si 4>]*2]*2</textarea>
+            <textarea id="dslIndex" tabindex="2" onkeyup="compile(this.value, 'index', true)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">[[[<si 1> <si 2> <g 1> <s 3>]*4 <g 6> <si 4>]*2]*2</textarea>
         </section>
         <section class="col">
             <h1></h1>
@@ -47,7 +51,7 @@
     <section class="row">
         <section class="col">
             <h1><span>Waveforms</span></h1>
-            <textarea id="dslWaveforms" tabindex="3" onkeyup="compile(this.value, 'waveforms')" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><si 1> <si 2> <g 1> <s 3> <g 3></textarea>
+            <textarea id="dslWaveforms" tabindex="3" onkeyup="compile(this.value, 'waveforms', true)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><si 1> <si 2> <g 1> <s 3> <g 3></textarea>
         </section>
         <section class="col">
             <h1></h1>

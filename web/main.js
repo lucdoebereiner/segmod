@@ -4,13 +4,24 @@ var theme;
 var compile;
 var wave = new RIFFWAVE();
 audio.loop = true;
+var randomSeed;
 
-const getQParam = (param) =>
-  decodeURI(atob(new URL(window.location).searchParams.get(param)));
+const getQParam = (param, noB64) => {
+  let p = new URL(window.location).searchParams.get(param);
+  if (noB64) {
+    return p ? decodeURI(p) : "";
+  } else {
+    return p ? decodeURI(atob(p)) : "";
+  }
+};
 
-const setQParam = (param, val) => {
+const setQParam = (param, val, noB64) => {
   let url = new URL(window.location);
-  url.searchParams.set(param, encodeURI(btoa(val)));
+  if (noB64) {
+    url.searchParams.set(param, encodeURI(val));
+  } else {
+    url.searchParams.set(param, encodeURI(btoa(val)));
+  }
   window.history.pushState({ path: url.href }, "", url.href);
 };
 
@@ -52,21 +63,43 @@ window.onload = () => {
   };
 
   window.init = () => {
-    let f = (document.getElementById("freqs").value = getQParam("frequencies")),
-      i = (document.getElementById("dslIndex").value = getQParam("index")),
-      w = (document.getElementById("dslWaveforms").value = getQParam(
-        "waveforms"
-      ));
-    compile(i, "index");
-    compile(f, "waveforms");
+    let f = getQParam("frequencies");
+    if (f) {
+      document.getElementById("freqs").value = f;
+    }
+
+    let i = getQParam("index");
+    if (i) {
+      document.getElementById("dslIndex").value = i;
+    } else {
+      i = document.getElementById("dslIndex").value;
+    }
+
+    let w = getQParam("waveforms");
+    if (w) {
+      document.getElementById("dslWaveforms").value = w;
+    } else {
+      w = document.getElementById("dslWaveforms").value;
+    }
+
+    randomSeed = parseInt(getQParam("seed",true));
+    if (!randomSeed) {
+      randomSeed = Math.floor(Math.random() * 9998) + 1;
+      setQParam("seed", randomSeed,true)
+    }
+    document.getElementById("seed").value = randomSeed;
+
+    compile(i, "index", false);
+    compile(w, "waveforms", true);
+
     draw();
   };
 
-  window.compile = (txt, destination) => {
+  window.compile = (txt, destination, shouldRender) => {
     setQParam(destination, txt);
-    let seq = wave_dsl.parser.parse__GT_js(txt);
+    let seq = wave_dsl.parser.parse__GT_js(txt, randomSeed);
     document.getElementById(destination).value = seq.join(" ");
-    read();
+    shouldRender ? read() : undefined;
   };
 };
 
@@ -75,6 +108,7 @@ audio.onpause = () => {
 };
 
 const play = (e) => {
+  audio_ctx.resume();
   e.className = !audio.paused ? "off" : "";
   if (!audio.paused) {
     audio.pause();
@@ -87,6 +121,13 @@ const loopToggle = (e) => {
   audio.loop = !audio.loop;
   e.className = audio.loop ? "" : "off";
 };
+
+const changeSeed = (e) => {
+  randomSeed = e.value;
+  setQParam("seed", randomSeed,true);
+  compile(document.getElementById("dslWaveforms").value, "waveforms", true);
+  compile(document.getElementById("dslIndex").value, "index", true);
+}
 
 const dataURItoBlob = (dataURI) => {
   // convert base64/URLEncoded data component to raw binary data held in a string
